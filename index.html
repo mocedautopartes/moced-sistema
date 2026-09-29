@@ -1,1136 +1,2344 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MOCED | Control de Publicaciones</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<title>MOCED | Control de Publicaciones</title>
 
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --purple:#7c3aed;
-      --purple2:#9b5cff;
-      --bg:#09090d;
-      --panel:#111118;
-      --panel2:#17171f;
-      --border:#292934;
-      --text:#f5f5f7;
-      --muted:#9292a2;
-      --green:#28c76f;
-      --red:#ff4d67;
-    }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    body{
-      font-family:Inter,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      min-height:100vh;
-    }
+<style>
 
-    button,input{font:inherit}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-    /* LOGIN */
-    #loginScreen{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:25px;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(124,58,237,.22),transparent 38%),
-        #08080c;
-    }
+:root{
+    --purple:#813df1;
+    --purple2:#a15cff;
+    --purple-dark:#1c142b;
+    --bg:#08080d;
+    --sidebar:#0c0c12;
+    --panel:#111119;
+    --panel2:#15151e;
+    --border:#292934;
+    --text:#f5f5f8;
+    --muted:#9999aa;
+    --green:#2bd47d;
+    --yellow:#ffc145;
+    --red:#ff536c;
+}
 
-    .login-card{
-      width:100%;
-      max-width:430px;
-      background:rgba(17,17,24,.96);
-      border:1px solid var(--border);
-      border-radius:22px;
-      padding:40px;
-      box-shadow:0 30px 80px rgba(0,0,0,.5);
-    }
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
 
-    .logo-placeholder{
-      text-align:center;
-      font-size:42px;
-      font-weight:900;
-      font-style:italic;
-      letter-spacing:-3px;
-      margin-bottom:8px;
-    }
+button,input{
+    font:inherit;
+}
 
-    .logo-placeholder span{color:var(--purple2)}
+button{
+    cursor:pointer;
+}
 
-    .login-card h1{
-      text-align:center;
-      font-size:20px;
-      margin-top:20px;
-    }
 
-    .login-subtitle{
-      text-align:center;
-      color:var(--muted);
-      font-size:14px;
-      margin:8px 0 30px;
-    }
+/* ==========================================
+   LOGIN
+========================================== */
 
-    label{
-      display:block;
-      color:#b8b8c5;
-      font-size:13px;
-      margin:17px 0 8px;
-    }
+#loginScreen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
 
-    input{
-      width:100%;
-      background:#0b0b10;
-      border:1px solid var(--border);
-      color:white;
-      padding:13px 14px;
-      border-radius:10px;
-      outline:none;
-    }
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(124,58,237,.20),
+            transparent 38%
+        ),
+        #08080d;
+}
 
-    input:focus{border-color:var(--purple)}
+.login-card{
+    width:100%;
+    max-width:450px;
 
-    .primary-btn{
-      width:100%;
-      margin-top:24px;
-      border:none;
-      border-radius:10px;
-      padding:14px;
-      background:linear-gradient(135deg,var(--purple),var(--purple2));
-      color:white;
-      font-weight:700;
-      cursor:pointer;
-    }
+    background:rgba(17,17,25,.97);
 
-    #loginError{
-      color:#ff7588;
-      font-size:13px;
-      margin-top:15px;
-      text-align:center;
-      min-height:16px;
-    }
+    border:1px solid var(--border);
 
-    /* APP */
-    #app{display:none}
+    border-radius:24px;
+
+    padding:40px;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.55);
+}
+
+.login-logo{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.login-logo img{
+    width:320px;
+    max-width:95%;
+    height:auto;
+    object-fit:contain;
+    border-radius:8px;
+}
+
+.login-card h1{
+    text-align:center;
+    font-size:22px;
+}
+
+.login-subtitle{
+    text-align:center;
+    color:var(--muted);
+    font-size:14px;
+    margin-top:8px;
+    margin-bottom:30px;
+}
+
+label{
+    display:block;
+    color:#b8b8c6;
+    font-size:13px;
+    margin:18px 0 8px;
+}
+
+input{
+    width:100%;
+
+    background:#0b0b11;
+
+    border:1px solid var(--border);
+
+    color:white;
+
+    padding:13px 14px;
+
+    border-radius:10px;
+
+    outline:none;
+}
+
+input:focus{
+    border-color:var(--purple);
+}
+
+.primary-btn{
+    width:100%;
+
+    margin-top:25px;
+
+    border:none;
+
+    border-radius:10px;
+
+    padding:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--purple2)
+        );
+
+    color:white;
+
+    font-weight:700;
+
+    transition:.2s;
+}
+
+.primary-btn:hover{
+    transform:translateY(-1px);
+    box-shadow:0 8px 25px rgba(124,58,237,.25);
+}
+
+#loginError{
+    color:#ff7588;
+    font-size:13px;
+    margin-top:15px;
+    text-align:center;
+    min-height:16px;
+}
+
+
+/* ==========================================
+   APP
+========================================== */
+
+#app{
+    display:none;
+}
+
+
+/* SIDEBAR */
+
+.sidebar{
+    width:270px;
+    height:100vh;
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    background:var(--sidebar);
+
+    border-right:1px solid var(--border);
+
+    padding:24px 18px;
+
+    z-index:10;
+}
+
+.sidebar-logo{
+    width:100%;
+    padding:4px 7px 28px;
+}
+
+.sidebar-logo img{
+    width:205px;
+    max-width:100%;
+    height:auto;
+    object-fit:contain;
+    display:block;
+}
+
+.nav-item{
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    padding:14px 15px;
+
+    margin:6px 0;
+
+    border-radius:11px;
+
+    color:#aaaabb;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.nav-item:hover{
+    background:#15131d;
+    color:white;
+}
+
+.nav-item.active{
+    background:#1d152d;
+    color:#bd9bff;
+}
+
+.nav-icon{
+    width:25px;
+    text-align:center;
+    font-size:17px;
+}
+
+.logout{
+    position:absolute;
+    bottom:25px;
+    left:18px;
+    right:18px;
+}
+
+
+/* MAIN */
+
+.main{
+    margin-left:270px;
+
+    padding:35px 38px;
+
+    min-height:100vh;
+}
+
+.topbar{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:30px;
+
+    gap:20px;
+}
+
+.topbar h1{
+    font-size:29px;
+}
+
+.topbar p{
+    color:var(--muted);
+
+    margin-top:6px;
+
+    font-size:14px;
+}
+
+
+/* USER */
+
+.user-badge{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    padding:9px 14px;
+
+    border-radius:13px;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--purple2)
+        );
+
+    font-weight:bold;
+}
+
+.user-name{
+    font-size:13px;
+    font-weight:700;
+}
+
+.user-role{
+    font-size:11px;
+    color:var(--muted);
+    margin-top:3px;
+}
+
+
+/* ==========================================
+   STATS
+========================================== */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:18px;
+
+    margin-bottom:26px;
+}
+
+.stat-card{
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    padding:23px;
+
+    border-radius:16px;
+}
+
+.stat-title{
+    color:var(--muted);
+
+    font-size:12px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.8px;
+}
+
+.stat-number{
+    font-size:32px;
+
+    font-weight:800;
+
+    margin-top:11px;
+}
+
+.purple{
+    color:#aa82ff;
+}
+
+.green{
+    color:var(--green);
+}
+
+.progress{
+    height:6px;
+
+    background:#25252e;
+
+    border-radius:10px;
+
+    margin-top:13px;
+
+    overflow:hidden;
+}
+
+#progressBar{
+    height:100%;
+
+    width:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple),
+            var(--purple2)
+        );
+
+    transition:.4s;
+}
+
+
+/* ==========================================
+   PANEL
+========================================== */
+
+.panel{
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    overflow:hidden;
+}
+
+.panel-header{
+    padding:21px 23px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    align-items:center;
+}
+
+.panel-title{
+    font-size:17px;
+    font-weight:700;
+}
+
+.panel-description{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
+}
+
+.search{
+    max-width:330px;
+    padding:11px 13px;
+}
+
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.table-wrap{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:1050px;
+}
+
+th{
+    color:#9090a2;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.7px;
+
+    text-align:left;
+
+    padding:15px 18px;
+
+    border-bottom:1px solid var(--border);
+}
+
+td{
+    padding:15px 18px;
+
+    border-bottom:1px solid #202028;
+
+    font-size:13px;
+
+    vertical-align:middle;
+}
+
+tbody tr{
+    transition:.15s;
+}
+
+tbody tr:hover{
+    background:#15151d;
+}
+
+.status{
+    padding:6px 9px;
+
+    border-radius:7px;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    display:inline-block;
+}
+
+.pending{
+    background:rgba(255,180,0,.11);
+    color:var(--yellow);
+}
+
+.published{
+    background:rgba(40,199,111,.11);
+    color:#55dc91;
+}
+
+.check{
+    width:21px;
+    height:21px;
+
+    accent-color:var(--purple);
+
+    cursor:pointer;
+}
+
+.link-input{
+    min-width:260px;
+
+    padding:9px 11px;
+
+    font-size:12px;
+}
+
+.save-btn{
+    border:none;
+
+    background:#282037;
+
+    color:#cdb8ff;
+
+    padding:9px 13px;
+
+    border-radius:8px;
+
+    transition:.2s;
+}
+
+.save-btn:hover{
+    background:#37284f;
+}
+
+.ml-link{
+    color:#ae8aff;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.ml-link:hover{
+    text-decoration:underline;
+}
+
+.empty{
+    padding:65px 20px;
+
+    text-align:center;
+
+    color:var(--muted);
+}
+
+
+/* ==========================================
+   LOCKED
+========================================== */
+
+.locked{
+    min-height:450px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+}
+
+.locked-icon{
+    font-size:48px;
+    margin-bottom:15px;
+}
+
+.locked h2{
+    margin-bottom:8px;
+}
+
+.locked p{
+    color:var(--muted);
+}
+
+.hidden{
+    display:none !important;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:900px){
 
     .sidebar{
-      width:250px;
-      height:100vh;
-      position:fixed;
-      left:0;
-      top:0;
-      background:#0d0d12;
-      border-right:1px solid var(--border);
-      padding:25px 17px;
+        width:78px;
+        padding:22px 10px;
     }
 
-    .brand{
-      font-size:28px;
-      font-weight:900;
-      font-style:italic;
-      margin:0 12px 35px;
+    .sidebar-logo{
+        padding:5px 0 25px;
+        text-align:center;
     }
 
-    .brand span{color:var(--purple2)}
+    .sidebar-logo img{
+        width:65px;
+    }
+
+    .nav-text{
+        display:none;
+    }
 
     .nav-item{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:13px 14px;
-      margin:5px 0;
-      border-radius:10px;
-      color:#aaaaba;
-      cursor:pointer;
-      transition:.2s;
-    }
-
-    .nav-item:hover,.nav-item.active{
-      background:#1a1527;
-      color:white;
-    }
-
-    .nav-item.active{color:#b99aff}
-
-    .nav-icon{
-      width:25px;
-      text-align:center;
-    }
-
-    .logout{
-      position:absolute;
-      bottom:25px;
-      left:17px;
-      right:17px;
+        justify-content:center;
     }
 
     .main{
-      margin-left:250px;
-      padding:35px;
-      min-height:100vh;
+        margin-left:78px;
+        padding:22px;
     }
 
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:30px;
-    }
-
-    .topbar h1{font-size:27px}
-
-    .topbar p{
-      color:var(--muted);
-      margin-top:6px;
-      font-size:14px;
+    .stats{
+        grid-template-columns:1fr;
     }
 
     .user-badge{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      background:var(--panel);
-      border:1px solid var(--border);
-      padding:8px 13px;
-      border-radius:12px;
+        display:none;
     }
 
-    .avatar{
-      width:35px;
-      height:35px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:9px;
-      background:linear-gradient(135deg,var(--purple),var(--purple2));
-      font-weight:bold;
+    .topbar h1{
+        font-size:23px;
     }
 
-    .user-name{font-size:13px;font-weight:700}
-    .user-role{font-size:11px;color:var(--muted);margin-top:2px}
+}
 
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:17px;
-      margin-bottom:25px;
-    }
-
-    .stat-card{
-      background:var(--panel);
-      border:1px solid var(--border);
-      padding:21px;
-      border-radius:15px;
-    }
-
-    .stat-title{
-      color:var(--muted);
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:.7px;
-    }
-
-    .stat-number{
-      font-size:30px;
-      font-weight:800;
-      margin-top:10px;
-    }
-
-    .purple{color:#aa82ff}
-    .green{color:var(--green)}
-
-    .progress{
-      height:6px;
-      background:#25252e;
-      border-radius:10px;
-      margin-top:12px;
-      overflow:hidden;
-    }
-
-    #progressBar{
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg,var(--purple),var(--purple2));
-    }
-
-    .panel{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:15px;
-      overflow:hidden;
-    }
-
-    .panel-header{
-      padding:20px;
-      border-bottom:1px solid var(--border);
-      display:flex;
-      justify-content:space-between;
-      gap:15px;
-      align-items:center;
-    }
-
-    .panel-title{font-size:16px;font-weight:700}
-
-    .search{
-      max-width:300px;
-      padding:10px 12px;
-    }
-
-    .table-wrap{overflow:auto}
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:950px;
-    }
-
-    th{
-      color:#8f8f9f;
-      font-size:11px;
-      text-transform:uppercase;
-      letter-spacing:.6px;
-      text-align:left;
-      padding:14px 17px;
-      border-bottom:1px solid var(--border);
-    }
-
-    td{
-      padding:14px 17px;
-      border-bottom:1px solid #202028;
-      font-size:13px;
-    }
-
-    tr:hover{background:#15151c}
-
-    .status{
-      padding:6px 9px;
-      border-radius:7px;
-      font-size:11px;
-      font-weight:700;
-      display:inline-block;
-    }
-
-    .pending{
-      background:rgba(255,180,0,.1);
-      color:#ffc14d;
-    }
-
-    .published{
-      background:rgba(40,199,111,.1);
-      color:#55dc91;
-    }
-
-    .check{
-      width:20px;
-      height:20px;
-      accent-color:var(--purple);
-      cursor:pointer;
-    }
-
-    .link-input{
-      min-width:230px;
-      padding:8px 10px;
-      font-size:12px;
-    }
-
-    .save-btn{
-      border:none;
-      background:#252033;
-      color:#cdb8ff;
-      padding:8px 11px;
-      border-radius:7px;
-      cursor:pointer;
-    }
-
-    .empty{
-      padding:60px 20px;
-      text-align:center;
-      color:var(--muted);
-    }
-
-    .locked{
-      min-height:450px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-    }
-
-    .locked-icon{font-size:45px;margin-bottom:15px}
-    .locked h2{margin-bottom:8px}
-    .locked p{color:var(--muted)}
-
-    .hidden{display:none!important}
-
-    @media(max-width:850px){
-      .sidebar{
-        width:75px;
-        padding:25px 10px;
-      }
-
-      .brand{
-        font-size:17px;
-        margin:0 4px 35px;
-      }
-
-      .nav-text{display:none}
-      .nav-item{justify-content:center}
-      .main{margin-left:75px;padding:20px}
-      .stats{grid-template-columns:1fr}
-      .user-badge{display:none}
-      .topbar h1{font-size:22px}
-    }
-  </style>
+</style>
 </head>
+
 
 <body>
 
+
+<!-- ==========================================
+     LOGIN
+========================================== -->
+
 <section id="loginScreen">
-  <div class="login-card">
 
-    <div class="logo-placeholder">MO<span>CED</span></div>
+<div class="login-card">
 
-    <h1>Control de Publicaciones</h1>
-    <div class="login-subtitle">
-      Sistema interno de gestión de autopartes
+    <div class="login-logo">
+
+        <img
+        src="logo-moced.jpg"
+        alt="MOCED Autopartes"
+        onerror="this.style.display='none';document.getElementById('fallbackLogo').style.display='block';">
+
+        <div
+        id="fallbackLogo"
+        style="
+        display:none;
+        font-size:45px;
+        font-weight:900;
+        font-style:italic;
+        margin-bottom:15px;
+        ">
+        MO<span style="color:#9855ff">CED</span>
+        </div>
+
     </div>
 
+    <h1>
+        Control de Publicaciones
+    </h1>
+
+    <div class="login-subtitle">
+        Sistema interno de gestión de autopartes
+    </div>
+
+
     <form id="loginForm">
-      <label>Usuario</label>
-      <input id="username" autocomplete="username" placeholder="Ingresa tu usuario">
 
-      <label>Contraseña</label>
-      <input id="password" type="password" autocomplete="current-password" placeholder="••••••••">
+        <label>
+            Usuario
+        </label>
 
-      <button class="primary-btn">Iniciar sesión</button>
+        <input
+        id="username"
+        autocomplete="username"
+        placeholder="Ingresa tu usuario">
 
-      <div id="loginError"></div>
+
+        <label>
+            Contraseña
+        </label>
+
+        <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="••••••••">
+
+
+        <button class="primary-btn">
+            Iniciar sesión
+        </button>
+
+
+        <div id="loginError"></div>
+
     </form>
 
-  </div>
+</div>
+
 </section>
 
+
+
+<!-- ==========================================
+     SOFTWARE
+========================================== -->
 
 <section id="app">
 
-  <aside class="sidebar">
 
-    <div class="brand">MO<span>CED</span></div>
+<!-- SIDEBAR -->
 
-    <div class="nav-item active" onclick="showSection('piezas',this)">
-      <div class="nav-icon">▦</div>
-      <div class="nav-text">Subir piezas</div>
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <img
+        src="logo-moced.jpg"
+        alt="MOCED"
+        onerror="this.style.display='none'">
+
     </div>
 
-    <div class="nav-item" onclick="showLocked('Fotos de piezas',this)">
-      <div class="nav-icon">▧</div>
-      <div class="nav-text">Fotos de piezas</div>
+
+    <div
+    class="nav-item active"
+    onclick="showPieces(this)">
+
+        <div class="nav-icon">
+            ▦
+        </div>
+
+        <div class="nav-text">
+            Subir piezas
+        </div>
+
     </div>
 
-    <div class="nav-item" onclick="openAdmin(this)">
-      <div class="nav-icon">⚙</div>
-      <div class="nav-text">Administración</div>
+
+    <div
+    class="nav-item"
+    onclick="showLocked('Fotos de piezas',this)">
+
+        <div class="nav-icon">
+            ▧
+        </div>
+
+        <div class="nav-text">
+            Fotos de piezas
+        </div>
+
     </div>
+
+
+    <div
+    class="nav-item"
+    onclick="openAdmin(this)">
+
+        <div class="nav-icon">
+            ⚙
+        </div>
+
+        <div class="nav-text">
+            Administración
+        </div>
+
+    </div>
+
 
     <div class="logout">
-      <div class="nav-item" onclick="logout()">
-        <div class="nav-icon">↪</div>
-        <div class="nav-text">Cerrar sesión</div>
-      </div>
-    </div>
 
-  </aside>
+        <div
+        class="nav-item"
+        onclick="logout()">
 
-
-  <main class="main">
-
-    <div class="topbar">
-
-      <div>
-        <h1 id="pageTitle">Subir piezas</h1>
-        <p id="welcomeText">Control de publicaciones de Mercado Libre</p>
-      </div>
-
-      <div class="user-badge">
-        <div class="avatar" id="avatar">M</div>
-        <div>
-          <div class="user-name" id="displayUser">MOCED</div>
-          <div class="user-role" id="displayRole">Administrador</div>
-        </div>
-      </div>
-
-    </div>
-
-
-    <section id="piezasSection">
-
-      <div class="stats">
-
-        <div class="stat-card">
-          <div class="stat-title">Subidas este mes</div>
-          <div class="stat-number purple" id="monthlyCount">0</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-title">Objetivo semanal</div>
-          <div class="stat-number" id="weeklyCount">0 / 70</div>
-          <div class="progress">
-            <div id="progressBar"></div>
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-title">Piezas pendientes</div>
-          <div class="stat-number" id="pendingCount">0</div>
-        </div>
-
-      </div>
-
-
-      <div class="panel">
-
-        <div class="panel-header">
-          <div>
-            <div class="panel-title">Listado de piezas</div>
-          </div>
-
-          <input
-            class="search"
-            id="searchInput"
-            placeholder="Buscar pieza, marca, modelo..."
-            oninput="renderPieces()"
-          >
-        </div>
-
-        <div class="table-wrap">
-
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Pieza</th>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Año</th>
-                <th>Lado</th>
-                <th>Estado</th>
-                <th>Publicada</th>
-                <th>Link Mercado Libre</th>
-                <th></th>
-              </tr>
-            </thead>
-
-            <tbody id="piecesTable"></tbody>
-
-          </table>
-
-          <div id="emptyState" class="empty hidden">
-            No hay piezas registradas todavía.
-          </div>
-
-        </div>
-      </div>
-
-    </section>
-
-
-    <section id="lockedSection" class="hidden">
-
-      <div class="panel locked">
-        <div>
-          <div class="locked-icon">🔒</div>
-          <h2 id="lockedTitle">Acceso restringido</h2>
-          <p>No tienes acceso a este apartado.</p>
-        </div>
-      </div>
-
-    </section>
-
-
-    <section id="adminSection" class="hidden">
-
-      <div class="stats">
-
-        <div class="stat-card">
-          <div class="stat-title">Total de piezas</div>
-          <div class="stat-number" id="adminTotal">0</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-title">Publicadas</div>
-          <div class="stat-number green" id="adminPublished">0</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-title">Pendientes</div>
-          <div class="stat-number purple" id="adminPending">0</div>
-        </div>
-
-      </div>
-
-      <div class="panel">
-        <div class="panel-header">
-          <div>
-            <div class="panel-title">Administración MOCED</div>
-            <div style="color:#9292a2;font-size:12px;margin-top:5px">
-              Seguimiento general de publicaciones
+            <div class="nav-icon">
+                ↪
             </div>
-          </div>
+
+            <div class="nav-text">
+                Cerrar sesión
+            </div>
+
         </div>
 
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Pieza</th>
-                <th>Vehículo</th>
-                <th>Estado</th>
-                <th>Publicado por</th>
-                <th>Fecha</th>
-                <th>Publicación</th>
-              </tr>
-            </thead>
-            <tbody id="adminTable"></tbody>
-          </table>
+    </div>
+
+</aside>
+
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+<div class="topbar">
+
+    <div>
+
+        <h1 id="pageTitle">
+            Subir piezas
+        </h1>
+
+        <p id="pageSubtitle">
+            Control de publicaciones de Mercado Libre
+        </p>
+
+    </div>
+
+
+    <div class="user-badge">
+
+        <div
+        class="avatar"
+        id="avatar">
+            M
         </div>
-      </div>
 
-    </section>
+        <div>
 
-  </main>
+            <div
+            class="user-name"
+            id="displayUser">
+                MOCED
+            </div>
+
+            <div
+            class="user-role"
+            id="displayRole">
+                Administrador
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================
+     PIEZAS
+========================================== -->
+
+<section id="piecesSection">
+
+
+<div class="stats">
+
+
+    <div class="stat-card">
+
+        <div class="stat-title">
+            Subidas este mes
+        </div>
+
+        <div
+        class="stat-number purple"
+        id="monthlyCount">
+            0
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-title">
+            Objetivo semanal
+        </div>
+
+        <div
+        class="stat-number"
+        id="weeklyCount">
+            0 / 70
+        </div>
+
+        <div class="progress">
+
+            <div id="progressBar"></div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-title">
+            Piezas pendientes
+        </div>
+
+        <div
+        class="stat-number"
+        id="pendingCount">
+            0
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="panel">
+
+
+<div class="panel-header">
+
+    <div>
+
+        <div class="panel-title">
+            Listado de piezas
+        </div>
+
+        <div class="panel-description">
+            Pendientes primero · Marca cuando la publicación esté terminada
+        </div>
+
+    </div>
+
+
+    <input
+    class="search"
+    id="searchInput"
+    placeholder="Buscar pieza, marca, modelo..."
+    oninput="renderPieces()">
+
+</div>
+
+
+
+<div class="table-wrap">
+
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>#</th>
+    <th>Pieza</th>
+    <th>Marca</th>
+    <th>Modelo</th>
+    <th>Año</th>
+    <th>Lado</th>
+    <th>Estado</th>
+    <th>Publicada</th>
+    <th>Link Mercado Libre</th>
+    <th></th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="piecesTable"></tbody>
+
+
+</table>
+
+
+<div
+id="emptyState"
+class="empty hidden">
+
+    No hay piezas registradas.
+
+</div>
+
+
+</div>
+
+</div>
+
 
 </section>
+
+
+
+<!-- ==========================================
+     BLOQUEADO
+========================================== -->
+
+<section
+id="lockedSection"
+class="hidden">
+
+
+<div class="panel locked">
+
+    <div>
+
+        <div class="locked-icon">
+            🔒
+        </div>
+
+        <h2 id="lockedTitle">
+            Acceso restringido
+        </h2>
+
+        <p>
+            No tienes acceso a este apartado.
+        </p>
+
+    </div>
+
+</div>
+
+
+</section>
+
+
+
+<!-- ==========================================
+     ADMIN
+========================================== -->
+
+<section
+id="adminSection"
+class="hidden">
+
+
+<div class="stats">
+
+
+<div class="stat-card">
+
+    <div class="stat-title">
+        Total de piezas
+    </div>
+
+    <div
+    class="stat-number"
+    id="adminTotal">
+        0
+    </div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+    <div class="stat-title">
+        Publicadas
+    </div>
+
+    <div
+    class="stat-number green"
+    id="adminPublished">
+        0
+    </div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+    <div class="stat-title">
+        Pendientes
+    </div>
+
+    <div
+    class="stat-number purple"
+    id="adminPending">
+        0
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+<div class="panel">
+
+
+<div class="panel-header">
+
+    <div>
+
+        <div class="panel-title">
+            Administración MOCED
+        </div>
+
+        <div class="panel-description">
+            Historial de publicaciones realizadas
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="table-wrap">
+
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>Pieza</th>
+    <th>Vehículo</th>
+    <th>Estado</th>
+    <th>Publicado por</th>
+    <th>Fecha</th>
+    <th>Mercado Libre</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="adminTable"></tbody>
+
+
+</table>
+
+
+<div
+id="adminEmpty"
+class="empty hidden">
+
+    Todavía no existen publicaciones.
+
+</div>
+
+
+</div>
+
+</div>
+
+
+</section>
+
+
+</main>
+
+</section>
+
 
 
 <script>
 
+/* ==========================================
+   SUPABASE
+========================================== */
+
 const SUPABASE_URL =
-  "https://ettmywmhvmihkzubtcng.supabase.co";
+"https://ettmywmhvmihkzubtcng.supabase.co";
+
 
 const SUPABASE_KEY =
-  "sb_publishable_YPilTgaZckx80q4mqSLn1w_RNlaLfE2";
+"sb_publishable_YPilTgaZckx80q4mqSLn1w_RNlaLfE2";
 
-const db = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
+
+const db =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
 );
 
 
-// USUARIOS
-const USERS = {
-  moced: {
-    password: "moced2026",
-    role: "admin",
-    name: "MOCED"
-  },
 
-  pradoerick: {
-    password: "erick1207",
-    role: "worker",
-    name: "Erick Prado"
-  }
+/* ==========================================
+   USUARIOS
+========================================== */
+
+const USERS = {
+
+    moced:{
+        password:"moced2026",
+        role:"admin",
+        name:"MOCED"
+    },
+
+    pradoerick:{
+        password:"erick1207",
+        role:"worker",
+        name:"Erick Prado"
+    }
+
 };
 
 
-let currentUser = null;
-let pieces = [];
+let currentUser=null;
+
+let pieces=[];
 
 
-// LOGIN
-document.getElementById("loginForm")
-.addEventListener("submit", function(e){
 
-  e.preventDefault();
+/* ==========================================
+   LOGIN
+========================================== */
 
-  const username =
-    document.getElementById("username").value.trim().toLowerCase();
+document
+.getElementById("loginForm")
+.addEventListener(
+"submit",
+function(e){
 
-  const password =
-    document.getElementById("password").value;
+    e.preventDefault();
 
-  const user = USERS[username];
 
-  if(!user || user.password !== password){
+    const username =
+    document
+    .getElementById("username")
+    .value
+    .trim()
+    .toLowerCase();
 
-    document.getElementById("loginError").textContent =
-      "Usuario o contraseña incorrectos.";
 
-    return;
-  }
+    const password =
+    document
+    .getElementById("password")
+    .value;
 
-  currentUser = {
-    username,
-    ...user
-  };
 
-  sessionStorage.setItem(
-    "mocedUser",
-    JSON.stringify(currentUser)
-  );
+    const user =
+    USERS[username];
 
-  enterApp();
-});
+
+    if(
+        !user ||
+        user.password !== password
+    ){
+
+        document
+        .getElementById("loginError")
+        .textContent =
+        "Usuario o contraseña incorrectos.";
+
+        return;
+
+    }
+
+
+    currentUser = {
+
+        username,
+
+        ...user
+
+    };
+
+
+    sessionStorage.setItem(
+        "mocedUser",
+        JSON.stringify(currentUser)
+    );
+
+
+    enterApp();
+
+}
+);
+
 
 
 function enterApp(){
 
-  document.getElementById("loginScreen").style.display="none";
-  document.getElementById("app").style.display="block";
+    document
+    .getElementById("loginScreen")
+    .style.display="none";
 
-  document.getElementById("displayUser").textContent =
+
+    document
+    .getElementById("app")
+    .style.display="block";
+
+
+    document
+    .getElementById("displayUser")
+    .textContent =
     currentUser.name;
 
-  document.getElementById("displayRole").textContent =
-    currentUser.role === "admin"
+
+    document
+    .getElementById("displayRole")
+    .textContent =
+    currentUser.role==="admin"
     ? "Administrador"
     : "Trabajador";
 
-  document.getElementById("avatar").textContent =
-    currentUser.name.charAt(0);
 
-  loadPieces();
+    document
+    .getElementById("avatar")
+    .textContent =
+    currentUser.name
+    .charAt(0)
+    .toUpperCase();
+
+
+    showPieces();
+
+
+    loadPieces();
+
 }
+
 
 
 function logout(){
 
-  sessionStorage.removeItem("mocedUser");
-  location.reload();
+    sessionStorage.removeItem(
+        "mocedUser"
+    );
+
+    location.reload();
+
 }
 
 
-// RECUPERAR SESIÓN
-const savedUser = sessionStorage.getItem("mocedUser");
+
+/* ==========================================
+   RECUPERAR SESIÓN
+========================================== */
+
+const savedUser =
+sessionStorage.getItem(
+    "mocedUser"
+);
+
 
 if(savedUser){
 
-  currentUser = JSON.parse(savedUser);
-  enterApp();
+    try{
+
+        currentUser =
+        JSON.parse(savedUser);
+
+        enterApp();
+
+    }
+
+    catch{
+
+        sessionStorage.removeItem(
+            "mocedUser"
+        );
+
+    }
 
 }
 
 
-// CARGAR PIEZAS
+
+/* ==========================================
+   CARGAR PIEZAS
+========================================== */
+
 async function loadPieces(){
 
-  const {data,error} = await db
+    const {
+        data,
+        error
+    } =
+    await db
     .from("piezas")
-    .select("*")
-    .order("id",{ascending:false});
+    .select("*");
 
-  if(error){
 
-    console.error(error);
+    if(error){
 
-    alert(
-      "No se pudieron cargar las piezas desde la base de datos."
-    );
+        console.error(error);
 
-    return;
-  }
+        alert(
+            "No se pudieron cargar las piezas."
+        );
 
-  pieces = data || [];
+        return;
 
-  renderPieces();
-  updateStats();
-  renderAdmin();
+    }
+
+
+    pieces =
+    (data || [])
+    .sort((a,b)=>{
+
+        if(
+            a.publicada !== b.publicada
+        ){
+
+            return a.publicada ? 1 : -1;
+
+        }
+
+        return b.id-a.id;
+
+    });
+
+
+    renderPieces();
+
+    updateStats();
+
+    renderAdmin();
+
 }
 
 
-// TABLA
+
+/* ==========================================
+   RENDER PIEZAS
+========================================== */
+
 function renderPieces(){
 
-  const tbody =
-    document.getElementById("piecesTable");
-
-  const search =
-    document.getElementById("searchInput")
-    .value.toLowerCase();
-
-  const filtered = pieces.filter(p => {
-
-    const text =
-      `${p.pieza||""} ${p.marca||""} ${p.modelo||""}
-       ${p.anio||""} ${p.lado||""}`.toLowerCase();
-
-    return text.includes(search);
-
-  });
-
-  tbody.innerHTML="";
-
-  document.getElementById("emptyState")
-    .classList.toggle("hidden",filtered.length!==0);
-
-
-  filtered.forEach((p,index)=>{
-
-    const tr=document.createElement("tr");
-
-    tr.innerHTML=`
-
-      <td>${index+1}</td>
-
-      <td><strong>${safe(p.pieza)}</strong></td>
-
-      <td>${safe(p.marca)}</td>
-
-      <td>${safe(p.modelo)}</td>
-
-      <td>${safe(p.anio)}</td>
-
-      <td>${safe(p.lado)}</td>
-
-      <td>
-        <span class="status ${p.publicada ? "published":"pending"}">
-          ${p.publicada ? "PUBLICADA":"PENDIENTE"}
-        </span>
-      </td>
-
-      <td>
-        <input
-          class="check"
-          type="checkbox"
-          ${p.publicada ? "checked":""}
-          id="check-${p.id}"
-        >
-      </td>
-
-      <td>
-        <input
-          class="link-input"
-          id="link-${p.id}"
-          value="${safeAttribute(p.link_mercadolibre || "")}"
-          placeholder="Pega aquí el link..."
-        >
-      </td>
-
-      <td>
-        <button
-          class="save-btn"
-          onclick="savePiece(${p.id})">
-          Guardar
-        </button>
-      </td>
-
-    `;
-
-    tbody.appendChild(tr);
-
-  });
-
-}
-
-
-// GUARDAR PUBLICACIÓN
-async function savePiece(id){
-
-  const published =
-    document.getElementById(`check-${id}`).checked;
-
-  const link =
-    document.getElementById(`link-${id}`).value.trim();
-
-  if(published && !link){
-
-    alert(
-      "Pega primero el link de Mercado Libre antes de marcar la pieza como publicada."
+    const tbody =
+    document
+    .getElementById(
+        "piecesTable"
     );
 
-    return;
-  }
+
+    const search =
+    document
+    .getElementById(
+        "searchInput"
+    )
+    .value
+    .toLowerCase()
+    .trim();
 
 
-  const changes = {
+    const filtered =
+    pieces.filter(p=>{
 
-    publicada: published,
-
-    link_mercadolibre:
-      link || null,
-
-    publicado_por:
-      published
-      ? currentUser.username
-      : null,
-
-    fecha_publicacion:
-      published
-      ? new Date().toISOString()
-      : null
-
-  };
+        const text =
+        `${p.pieza || ""}
+         ${p.marca || ""}
+         ${p.modelo || ""}
+         ${p.anio || ""}
+         ${p.lado || ""}
+         ${p.descripcion || ""}`
+        .toLowerCase();
 
 
-  const {error} = await db
-    .from("piezas")
-    .update(changes)
-    .eq("id",id);
+        return text.includes(search);
+
+    });
 
 
-  if(error){
+    tbody.innerHTML="";
 
-    console.error(error);
 
-    alert(
-      "Ocurrió un error al guardar."
+    document
+    .getElementById(
+        "emptyState"
+    )
+    .classList
+    .toggle(
+        "hidden",
+        filtered.length !== 0
     );
 
-    return;
-  }
+
+    filtered.forEach(
+    (p,index)=>{
 
 
-  await loadPieces();
-
-  alert("Información guardada correctamente.");
-
-}
-
-
-// ESTADÍSTICAS
-function updateStats(){
-
-  const now=new Date();
-
-  const monthStart =
-    new Date(now.getFullYear(),now.getMonth(),1);
-
-  const day=now.getDay();
-
-  const monday=new Date(now);
-
-  monday.setDate(
-    now.getDate() - (day===0 ? 6 : day-1)
-  );
-
-  monday.setHours(0,0,0,0);
+        const tr =
+        document.createElement(
+            "tr"
+        );
 
 
-  const published =
-    pieces.filter(p=>p.publicada);
-
-
-  const monthly =
-    published.filter(p=>
-      p.fecha_publicacion &&
-      new Date(p.fecha_publicacion)>=monthStart
-    ).length;
-
-
-  const weekly =
-    published.filter(p=>
-      p.fecha_publicacion &&
-      new Date(p.fecha_publicacion)>=monday
-    ).length;
-
-
-  const pending =
-    pieces.filter(p=>!p.publicada).length;
-
-
-  document.getElementById("monthlyCount")
-    .textContent=monthly.toLocaleString();
-
-
-  document.getElementById("weeklyCount")
-    .textContent=`${weekly} / 70`;
-
-
-  document.getElementById("pendingCount")
-    .textContent=pending.toLocaleString();
-
-
-  const percent =
-    Math.min((weekly/70)*100,100);
-
-  document.getElementById("progressBar")
-    .style.width=percent+"%";
-
-
-  document.getElementById("adminTotal")
-    .textContent=pieces.length.toLocaleString();
-
-  document.getElementById("adminPublished")
-    .textContent=published.length.toLocaleString();
-
-  document.getElementById("adminPending")
-    .textContent=pending.toLocaleString();
-
-}
-
-
-// ADMIN
-function renderAdmin(){
-
-  const tbody =
-    document.getElementById("adminTable");
-
-  tbody.innerHTML="";
-
-  pieces
-    .filter(p=>p.publicada)
-    .forEach(p=>{
-
-      const tr=document.createElement("tr");
-
-      let date="-";
-
-      if(p.fecha_publicacion){
-
-        date =
-          new Date(p.fecha_publicacion)
-          .toLocaleString("es-MX");
-
-      }
-
-      const validLink =
-        /^https?:\/\//i.test(p.link_mercadolibre || "");
-
-      tr.innerHTML=`
-
-        <td>${safe(p.pieza)}</td>
+        tr.innerHTML=`
 
         <td>
-          ${safe(p.marca)}
-          ${safe(p.modelo)}
-          ${safe(p.anio)}
+            ${index+1}
         </td>
+
 
         <td>
-          <span class="status published">
-            PUBLICADA
-          </span>
+            <strong>
+                ${safe(p.pieza)}
+            </strong>
         </td>
 
-        <td>${safe(p.publicado_por || "-")}</td>
-
-        <td>${date}</td>
 
         <td>
-          ${
-            validLink
-            ? `<a href="${safeAttribute(p.link_mercadolibre)}"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 style="color:#ae8aff">
-                 Abrir publicación ↗
-               </a>`
-            : "-"
-          }
+            ${safe(p.marca)}
         </td>
 
-      `;
 
-      tbody.appendChild(tr);
+        <td>
+            ${safe(p.modelo)}
+        </td>
+
+
+        <td>
+            ${safe(p.anio)}
+        </td>
+
+
+        <td>
+            ${safe(p.lado)}
+        </td>
+
+
+        <td>
+
+            <span
+            class="
+            status
+            ${
+                p.publicada
+                ? "published"
+                : "pending"
+            }
+            ">
+
+                ${
+                    p.publicada
+                    ? "PUBLICADA"
+                    : "PENDIENTE"
+                }
+
+            </span>
+
+        </td>
+
+
+        <td>
+
+            <input
+            class="check"
+            type="checkbox"
+            id="check-${p.id}"
+            ${
+                p.publicada
+                ? "checked"
+                : ""
+            }>
+
+        </td>
+
+
+        <td>
+
+            <input
+            class="link-input"
+            id="link-${p.id}"
+            value="${
+                safeAttribute(
+                    p.link_mercadolibre || ""
+                )
+            }"
+            placeholder="Pega aquí el link...">
+
+        </td>
+
+
+        <td>
+
+            <button
+            class="save-btn"
+            onclick="savePiece(${p.id})">
+
+                Guardar
+
+            </button>
+
+        </td>
+
+        `;
+
+
+        tbody.appendChild(tr);
 
     });
 
 }
 
 
-// NAVEGACIÓN
-function hideSections(){
 
-  document.getElementById("piezasSection")
-    .classList.add("hidden");
+/* ==========================================
+   GUARDAR PIEZA
+========================================== */
 
-  document.getElementById("lockedSection")
-    .classList.add("hidden");
+async function savePiece(id){
 
-  document.getElementById("adminSection")
-    .classList.add("hidden");
+    const checkbox =
+    document.getElementById(
+        `check-${id}`
+    );
+
+
+    const linkInput =
+    document.getElementById(
+        `link-${id}`
+    );
+
+
+    const published =
+    checkbox.checked;
+
+
+    const link =
+    linkInput
+    .value
+    .trim();
+
+
+    if(
+        published &&
+        !link
+    ){
+
+        alert(
+            "Pega el link de Mercado Libre antes de marcar la pieza como publicada."
+        );
+
+        checkbox.checked=false;
+
+        return;
+
+    }
+
+
+    const oldPiece =
+    pieces.find(
+        p=>p.id===id
+    );
+
+
+    let publicationDate=null;
+
+
+    if(published){
+
+        publicationDate =
+        oldPiece &&
+        oldPiece.publicada &&
+        oldPiece.fecha_publicacion
+
+        ? oldPiece.fecha_publicacion
+
+        : new Date().toISOString();
+
+    }
+
+
+    const changes={
+
+        publicada:published,
+
+        link_mercadolibre:
+            link || null,
+
+        publicado_por:
+            published
+            ? currentUser.username
+            : null,
+
+        fecha_publicacion:
+            publicationDate
+
+    };
+
+
+    const {error} =
+    await db
+    .from("piezas")
+    .update(changes)
+    .eq("id",id);
+
+
+    if(error){
+
+        console.error(error);
+
+        alert(
+            "Ocurrió un error al guardar."
+        );
+
+        return;
+
+    }
+
+
+    await loadPieces();
+
+
+    alert(
+        published
+        ? "Pieza publicada y guardada correctamente."
+        : "Cambios guardados correctamente."
+    );
 
 }
+
+
+
+/* ==========================================
+   ESTADÍSTICAS
+========================================== */
+
+function updateStats(){
+
+    const now =
+    new Date();
+
+
+    const monthStart =
+    new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        1
+    );
+
+
+    const day =
+    now.getDay();
+
+
+    const monday =
+    new Date(now);
+
+
+    monday.setDate(
+        now.getDate() -
+        (
+            day===0
+            ? 6
+            : day-1
+        )
+    );
+
+
+    monday.setHours(
+        0,0,0,0
+    );
+
+
+    const published =
+    pieces.filter(
+        p=>p.publicada
+    );
+
+
+    const monthly =
+    published.filter(
+    p=>
+
+        p.fecha_publicacion &&
+
+        new Date(
+            p.fecha_publicacion
+        ) >= monthStart
+
+    ).length;
+
+
+    const weekly =
+    published.filter(
+    p=>
+
+        p.fecha_publicacion &&
+
+        new Date(
+            p.fecha_publicacion
+        ) >= monday
+
+    ).length;
+
+
+    const pending =
+    pieces.filter(
+        p=>!p.publicada
+    ).length;
+
+
+    document
+    .getElementById(
+        "monthlyCount"
+    )
+    .textContent =
+    monthly.toLocaleString(
+        "es-MX"
+    );
+
+
+    document
+    .getElementById(
+        "weeklyCount"
+    )
+    .textContent =
+    `${weekly} / 70`;
+
+
+    document
+    .getElementById(
+        "pendingCount"
+    )
+    .textContent =
+    pending.toLocaleString(
+        "es-MX"
+    );
+
+
+    const percent =
+    Math.min(
+        (weekly/70)*100,
+        100
+    );
+
+
+    document
+    .getElementById(
+        "progressBar"
+    )
+    .style.width =
+    percent+"%";
+
+
+    document
+    .getElementById(
+        "adminTotal"
+    )
+    .textContent =
+    pieces.length
+    .toLocaleString(
+        "es-MX"
+    );
+
+
+    document
+    .getElementById(
+        "adminPublished"
+    )
+    .textContent =
+    published.length
+    .toLocaleString(
+        "es-MX"
+    );
+
+
+    document
+    .getElementById(
+        "adminPending"
+    )
+    .textContent =
+    pending
+    .toLocaleString(
+        "es-MX"
+    );
+
+}
+
+
+
+/* ==========================================
+   ADMINISTRACIÓN
+========================================== */
+
+function renderAdmin(){
+
+    const tbody =
+    document
+    .getElementById(
+        "adminTable"
+    );
+
+
+    tbody.innerHTML="";
+
+
+    const published =
+    pieces
+    .filter(
+        p=>p.publicada
+    )
+    .sort(
+    (a,b)=>
+
+        new Date(
+            b.fecha_publicacion || 0
+        ) -
+
+        new Date(
+            a.fecha_publicacion || 0
+        )
+
+    );
+
+
+    document
+    .getElementById(
+        "adminEmpty"
+    )
+    .classList
+    .toggle(
+        "hidden",
+        published.length !== 0
+    );
+
+
+    published.forEach(p=>{
+
+
+        const tr =
+        document.createElement(
+            "tr"
+        );
+
+
+        let date="-";
+
+
+        if(
+            p.fecha_publicacion
+        ){
+
+            date =
+            new Date(
+                p.fecha_publicacion
+            )
+            .toLocaleString(
+                "es-MX",
+                {
+                    dateStyle:"short",
+                    timeStyle:"short"
+                }
+            );
+
+        }
+
+
+        const validLink =
+        /^https?:\/\//i
+        .test(
+            p.link_mercadolibre || ""
+        );
+
+
+        tr.innerHTML=`
+
+        <td>
+            <strong>
+                ${safe(p.pieza)}
+            </strong>
+        </td>
+
+
+        <td>
+
+            ${safe(p.marca)}
+            ${safe(p.modelo)}
+            ${safe(p.anio)}
+            ${safe(p.lado)}
+
+        </td>
+
+
+        <td>
+
+            <span
+            class="status published">
+
+                PUBLICADA
+
+            </span>
+
+        </td>
+
+
+        <td>
+            ${safe(
+                p.publicado_por || "-"
+            )}
+        </td>
+
+
+        <td>
+            ${date}
+        </td>
+
+
+        <td>
+
+            ${
+                validLink
+
+                ?
+
+                `
+                <a
+                class="ml-link"
+                href="${
+                    safeAttribute(
+                        p.link_mercadolibre
+                    )
+                }"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                    Abrir publicación ↗
+
+                </a>
+                `
+
+                :
+
+                safe(
+                    p.link_mercadolibre
+                    || "-"
+                )
+            }
+
+        </td>
+
+        `;
+
+
+        tbody.appendChild(tr);
+
+    });
+
+}
+
+
+
+/* ==========================================
+   NAVEGACIÓN
+========================================== */
+
+function hideSections(){
+
+    document
+    .getElementById(
+        "piecesSection"
+    )
+    .classList
+    .add("hidden");
+
+
+    document
+    .getElementById(
+        "lockedSection"
+    )
+    .classList
+    .add("hidden");
+
+
+    document
+    .getElementById(
+        "adminSection"
+    )
+    .classList
+    .add("hidden");
+
+}
+
 
 
 function activateNav(el){
 
-  document
-    .querySelectorAll(".nav-item")
-    .forEach(x=>x.classList.remove("active"));
+    document
+    .querySelectorAll(
+        ".nav-item"
+    )
+    .forEach(
+        x=>
+        x.classList.remove(
+            "active"
+        )
+    );
 
-  if(el) el.classList.add("active");
+
+    if(el){
+
+        el.classList.add(
+            "active"
+        );
+
+    }
+
+}
+
+
+
+function showPieces(el=null){
+
+    hideSections();
+
+
+    if(el){
+
+        activateNav(el);
+
+    }
+
+
+    document
+    .getElementById(
+        "piecesSection"
+    )
+    .classList
+    .remove("hidden");
+
+
+    document
+    .getElementById(
+        "pageTitle"
+    )
+    .textContent =
+    "Subir piezas";
+
+
+    document
+    .getElementById(
+        "pageSubtitle"
+    )
+    .textContent =
+    "Control de publicaciones de Mercado Libre";
 
 }
 
 
-function showSection(section,el){
 
-  hideSections();
-  activateNav(el);
+function showLocked(
+    title,
+    el
+){
 
-  document.getElementById("piezasSection")
-    .classList.remove("hidden");
+    hideSections();
 
-  document.getElementById("pageTitle")
-    .textContent="Subir piezas";
+    activateNav(el);
+
+
+    document
+    .getElementById(
+        "lockedSection"
+    )
+    .classList
+    .remove("hidden");
+
+
+    document
+    .getElementById(
+        "lockedTitle"
+    )
+    .textContent =
+    title;
+
+
+    document
+    .getElementById(
+        "pageTitle"
+    )
+    .textContent =
+    title;
+
+
+    document
+    .getElementById(
+        "pageSubtitle"
+    )
+    .textContent =
+    "Módulo restringido";
 
 }
 
-
-function showLocked(title,el){
-
-  hideSections();
-  activateNav(el);
-
-  document.getElementById("lockedSection")
-    .classList.remove("hidden");
-
-  document.getElementById("lockedTitle")
-    .textContent=title;
-
-  document.getElementById("pageTitle")
-    .textContent=title;
-
-}
 
 
 function openAdmin(el){
 
-  if(currentUser.role!=="admin"){
+    if(
+        currentUser.role !==
+        "admin"
+    ){
 
-    showLocked("Administración",el);
-    return;
+        showLocked(
+            "Administración",
+            el
+        );
 
-  }
+        return;
 
-  hideSections();
-  activateNav(el);
+    }
 
-  document.getElementById("adminSection")
-    .classList.remove("hidden");
 
-  document.getElementById("pageTitle")
-    .textContent="Administración";
+    hideSections();
 
-  renderAdmin();
+    activateNav(el);
+
+
+    document
+    .getElementById(
+        "adminSection"
+    )
+    .classList
+    .remove("hidden");
+
+
+    document
+    .getElementById(
+        "pageTitle"
+    )
+    .textContent =
+    "Administración";
+
+
+    document
+    .getElementById(
+        "pageSubtitle"
+    )
+    .textContent =
+    "Control general de publicaciones";
+
+
+    renderAdmin();
 
 }
 
 
-// SEGURIDAD BÁSICA DE VISUALIZACIÓN
+
+/* ==========================================
+   ESCAPAR TEXTO
+========================================== */
+
 function safe(value){
 
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+    return String(
+        value ?? ""
+    )
+
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
 
 }
 
 
-function safeAttribute(value){
-  return safe(value);
+
+function safeAttribute(
+    value
+){
+
+    return safe(value);
+
 }
 
 </script>
+
 
 </body>
 </html>
