@@ -9,7 +9,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
 *{
     box-sizing:border-box;
     margin:0;
@@ -19,7 +18,6 @@
 :root{
     --purple:#813df1;
     --purple2:#a15cff;
-    --purple-dark:#1c142b;
     --bg:#08080d;
     --sidebar:#0c0c12;
     --panel:#111119;
@@ -30,6 +28,7 @@
     --green:#2bd47d;
     --yellow:#ffc145;
     --red:#ff536c;
+    --orange:#ff9f43;
 }
 
 body{
@@ -47,10 +46,9 @@ button{
     cursor:pointer;
 }
 
-
-/* ==========================================
+/* ================================
    LOGIN
-========================================== */
+================================ */
 
 #loginScreen{
     min-height:100vh;
@@ -58,7 +56,6 @@ button{
     align-items:center;
     justify-content:center;
     padding:25px;
-
     background:
         radial-gradient(
             circle at 50% 0%,
@@ -71,17 +68,11 @@ button{
 .login-card{
     width:100%;
     max-width:450px;
-
     background:rgba(17,17,25,.97);
-
     border:1px solid var(--border);
-
     border-radius:24px;
-
     padding:40px;
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.55);
+    box-shadow:0 30px 100px rgba(0,0,0,.55);
 }
 
 .login-logo{
@@ -119,17 +110,11 @@ label{
 
 input{
     width:100%;
-
     background:#0b0b11;
-
     border:1px solid var(--border);
-
     color:white;
-
     padding:13px 14px;
-
     border-radius:10px;
-
     outline:none;
 }
 
@@ -139,31 +124,16 @@ input:focus{
 
 .primary-btn{
     width:100%;
-
     margin-top:25px;
-
     border:none;
-
     border-radius:10px;
-
     padding:14px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--purple),
-            var(--purple2)
-        );
-
+    background:linear-gradient(135deg,var(--purple),var(--purple2));
     color:white;
-
     font-weight:700;
-
-    transition:.2s;
 }
 
 .primary-btn:hover{
-    transform:translateY(-1px);
     box-shadow:0 8px 25px rgba(124,58,237,.25);
 }
 
@@ -175,33 +145,23 @@ input:focus{
     min-height:16px;
 }
 
-
-/* ==========================================
+/* ================================
    APP
-========================================== */
+================================ */
 
 #app{
     display:none;
 }
 
-
-/* SIDEBAR */
-
 .sidebar{
     width:270px;
     height:100vh;
-
     position:fixed;
-
     left:0;
     top:0;
-
     background:var(--sidebar);
-
     border-right:1px solid var(--border);
-
     padding:24px 18px;
-
     z-index:10;
 }
 
@@ -220,21 +180,13 @@ input:focus{
 
 .nav-item{
     display:flex;
-
     align-items:center;
-
     gap:13px;
-
     padding:14px 15px;
-
     margin:6px 0;
-
     border-radius:11px;
-
     color:#aaaabb;
-
     cursor:pointer;
-
     transition:.2s;
 }
 
@@ -261,26 +213,17 @@ input:focus{
     right:18px;
 }
 
-
-/* MAIN */
-
 .main{
     margin-left:270px;
-
     padding:35px 38px;
-
     min-height:100vh;
 }
 
 .topbar{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     margin-bottom:30px;
-
     gap:20px;
 }
 
@@ -290,50 +233,28 @@ input:focus{
 
 .topbar p{
     color:var(--muted);
-
     margin-top:6px;
-
     font-size:14px;
 }
 
-
-/* USER */
-
 .user-badge{
     display:flex;
-
     align-items:center;
-
     gap:12px;
-
     background:var(--panel);
-
     border:1px solid var(--border);
-
     padding:9px 14px;
-
     border-radius:13px;
 }
 
 .avatar{
     width:38px;
     height:38px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     border-radius:10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--purple),
-            var(--purple2)
-        );
-
+    background:linear-gradient(135deg,var(--purple),var(--purple2));
     font-weight:bold;
 }
 
@@ -348,47 +269,34 @@ input:focus{
     margin-top:3px;
 }
 
-
-/* ==========================================
-   STATS
-========================================== */
+/* ================================
+   ESTADÍSTICAS
+================================ */
 
 .stats{
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:18px;
-
     margin-bottom:26px;
 }
 
 .stat-card{
     background:var(--panel);
-
     border:1px solid var(--border);
-
     padding:23px;
-
     border-radius:16px;
 }
 
 .stat-title{
     color:var(--muted);
-
     font-size:12px;
-
     text-transform:uppercase;
-
     letter-spacing:.8px;
 }
 
 .stat-number{
     font-size:32px;
-
     font-weight:800;
-
     margin-top:11px;
 }
 
@@ -400,59 +308,42 @@ input:focus{
     color:var(--green);
 }
 
+.orange{
+    color:var(--orange);
+}
+
 .progress{
     height:6px;
-
     background:#25252e;
-
     border-radius:10px;
-
     margin-top:13px;
-
     overflow:hidden;
 }
 
 #progressBar{
     height:100%;
-
     width:0;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--purple),
-            var(--purple2)
-        );
-
+    background:linear-gradient(90deg,var(--purple),var(--purple2));
     transition:.4s;
 }
 
-
-/* ==========================================
+/* ================================
    PANEL
-========================================== */
+================================ */
 
 .panel{
     background:var(--panel);
-
     border:1px solid var(--border);
-
     border-radius:16px;
-
     overflow:hidden;
 }
 
 .panel-header{
     padding:21px 23px;
-
     border-bottom:1px solid var(--border);
-
     display:flex;
-
     justify-content:space-between;
-
     gap:15px;
-
     align-items:center;
 }
 
@@ -468,14 +359,13 @@ input:focus{
 }
 
 .search{
-    max-width:330px;
+    max-width:360px;
     padding:11px 13px;
 }
 
-
-/* ==========================================
-   TABLE
-========================================== */
+/* ================================
+   TABLA
+================================ */
 
 .table-wrap{
     overflow:auto;
@@ -483,35 +373,25 @@ input:focus{
 
 table{
     width:100%;
-
     border-collapse:collapse;
-
-    min-width:1050px;
+    min-width:1550px;
 }
 
 th{
     color:#9090a2;
-
     font-size:11px;
-
     text-transform:uppercase;
-
     letter-spacing:.7px;
-
     text-align:left;
-
-    padding:15px 18px;
-
+    padding:15px 16px;
     border-bottom:1px solid var(--border);
+    white-space:nowrap;
 }
 
 td{
-    padding:15px 18px;
-
+    padding:15px 16px;
     border-bottom:1px solid #202028;
-
     font-size:13px;
-
     vertical-align:middle;
 }
 
@@ -523,16 +403,17 @@ tbody tr:hover{
     background:#15151d;
 }
 
+.review-row{
+    background:rgba(255,159,67,.025);
+}
+
 .status{
     padding:6px 9px;
-
     border-radius:7px;
-
     font-size:11px;
-
     font-weight:700;
-
     display:inline-block;
+    white-space:nowrap;
 }
 
 .pending{
@@ -545,35 +426,49 @@ tbody tr:hover{
     color:#55dc91;
 }
 
+.review-badge{
+    display:inline-block;
+    padding:6px 9px;
+    border-radius:7px;
+    background:rgba(255,159,67,.13);
+    border:1px solid rgba(255,159,67,.22);
+    color:#ffad5c;
+    font-size:10px;
+    font-weight:800;
+    white-space:nowrap;
+    margin-top:6px;
+}
+
+.price{
+    font-weight:700;
+    color:#e6e6ec;
+    white-space:nowrap;
+}
+
+.notes{
+    max-width:260px;
+    color:#c0c0ca;
+}
+
 .check{
     width:21px;
     height:21px;
-
     accent-color:var(--purple);
-
     cursor:pointer;
 }
 
 .link-input{
     min-width:260px;
-
     padding:9px 11px;
-
     font-size:12px;
 }
 
 .save-btn{
     border:none;
-
     background:#282037;
-
     color:#cdb8ff;
-
     padding:9px 13px;
-
     border-radius:8px;
-
-    transition:.2s;
 }
 
 .save-btn:hover{
@@ -592,26 +487,19 @@ tbody tr:hover{
 
 .empty{
     padding:65px 20px;
-
     text-align:center;
-
     color:var(--muted);
 }
 
-
-/* ==========================================
-   LOCKED
-========================================== */
+/* ================================
+   BLOQUEADO
+================================ */
 
 .locked{
     min-height:450px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     text-align:center;
 }
 
@@ -632,10 +520,15 @@ tbody tr:hover{
     display:none !important;
 }
 
+/* ================================
+   RESPONSIVE
+================================ */
 
-/* ==========================================
-   MOBILE
-========================================== */
+@media(max-width:1100px){
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
 
 @media(max-width:900px){
 
@@ -666,10 +559,6 @@ tbody tr:hover{
         padding:22px;
     }
 
-    .stats{
-        grid-template-columns:1fr;
-    }
-
     .user-badge{
         display:none;
     }
@@ -677,19 +566,29 @@ tbody tr:hover{
     .topbar h1{
         font-size:23px;
     }
+}
 
+@media(max-width:600px){
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .panel-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .search{
+        max-width:none;
+    }
 }
 
 </style>
 </head>
 
-
 <body>
 
-
-<!-- ==========================================
-     LOGIN
-========================================== -->
+<!-- LOGIN -->
 
 <section id="loginScreen">
 
@@ -711,35 +610,27 @@ tbody tr:hover{
         font-style:italic;
         margin-bottom:15px;
         ">
-        MO<span style="color:#9855ff">CED</span>
+            MO<span style="color:#9855ff">CED</span>
         </div>
 
     </div>
 
-    <h1>
-        Control de Publicaciones
-    </h1>
+    <h1>Control de Publicaciones</h1>
 
     <div class="login-subtitle">
         Sistema interno de gestión de autopartes
     </div>
 
-
     <form id="loginForm">
 
-        <label>
-            Usuario
-        </label>
+        <label>Usuario</label>
 
         <input
         id="username"
         autocomplete="username"
         placeholder="Ingresa tu usuario">
 
-
-        <label>
-            Contraseña
-        </label>
+        <label>Contraseña</label>
 
         <input
         id="password"
@@ -747,11 +638,9 @@ tbody tr:hover{
         autocomplete="current-password"
         placeholder="••••••••">
 
-
         <button class="primary-btn">
             Iniciar sesión
         </button>
-
 
         <div id="loginError"></div>
 
@@ -762,137 +651,67 @@ tbody tr:hover{
 </section>
 
 
-
-<!-- ==========================================
-     SOFTWARE
-========================================== -->
+<!-- SOFTWARE -->
 
 <section id="app">
-
-
-<!-- SIDEBAR -->
 
 <aside class="sidebar">
 
     <div class="sidebar-logo">
-
-        <img
-        src="logo-moced.jpg"
-        alt="MOCED"
-        onerror="this.style.display='none'">
-
+        <img src="logo-moced.jpg" alt="MOCED">
     </div>
-
 
     <div
     class="nav-item active"
     onclick="showPieces(this)">
-
-        <div class="nav-icon">
-            ▦
-        </div>
-
-        <div class="nav-text">
-            Subir piezas
-        </div>
-
+        <div class="nav-icon">▦</div>
+        <div class="nav-text">Subir piezas</div>
     </div>
-
 
     <div
     class="nav-item"
     onclick="showLocked('Fotos de piezas',this)">
-
-        <div class="nav-icon">
-            ▧
-        </div>
-
-        <div class="nav-text">
-            Fotos de piezas
-        </div>
-
+        <div class="nav-icon">▧</div>
+        <div class="nav-text">Fotos de piezas</div>
     </div>
-
 
     <div
     class="nav-item"
     onclick="openAdmin(this)">
-
-        <div class="nav-icon">
-            ⚙
-        </div>
-
-        <div class="nav-text">
-            Administración
-        </div>
-
+        <div class="nav-icon">⚙</div>
+        <div class="nav-text">Administración</div>
     </div>
 
-
     <div class="logout">
-
         <div
         class="nav-item"
         onclick="logout()">
-
-            <div class="nav-icon">
-                ↪
-            </div>
-
-            <div class="nav-text">
-                Cerrar sesión
-            </div>
-
+            <div class="nav-icon">↪</div>
+            <div class="nav-text">Cerrar sesión</div>
         </div>
-
     </div>
 
 </aside>
 
 
-
-<!-- MAIN -->
-
 <main class="main">
-
 
 <div class="topbar">
 
     <div>
-
-        <h1 id="pageTitle">
-            Subir piezas
-        </h1>
-
+        <h1 id="pageTitle">Subir piezas</h1>
         <p id="pageSubtitle">
             Control de publicaciones de Mercado Libre
         </p>
-
     </div>
-
 
     <div class="user-badge">
 
-        <div
-        class="avatar"
-        id="avatar">
-            M
-        </div>
+        <div class="avatar" id="avatar">M</div>
 
         <div>
-
-            <div
-            class="user-name"
-            id="displayUser">
-                MOCED
-            </div>
-
-            <div
-            class="user-role"
-            id="displayRole">
-                Administrador
-            </div>
-
+            <div class="user-name" id="displayUser">MOCED</div>
+            <div class="user-role" id="displayRole">Administrador</div>
         </div>
 
     </div>
@@ -900,76 +719,45 @@ tbody tr:hover{
 </div>
 
 
-
-<!-- ==========================================
-     PIEZAS
-========================================== -->
+<!-- PIEZAS -->
 
 <section id="piecesSection">
 
-
 <div class="stats">
 
-
     <div class="stat-card">
-
-        <div class="stat-title">
-            Subidas este mes
-        </div>
-
-        <div
-        class="stat-number purple"
-        id="monthlyCount">
-            0
-        </div>
-
+        <div class="stat-title">Subidas este mes</div>
+        <div class="stat-number purple" id="monthlyCount">0</div>
     </div>
 
-
-
     <div class="stat-card">
 
-        <div class="stat-title">
-            Objetivo semanal
-        </div>
+        <div class="stat-title">Objetivo semanal</div>
 
-        <div
-        class="stat-number"
-        id="weeklyCount">
+        <div class="stat-number" id="weeklyCount">
             0 / 70
         </div>
 
         <div class="progress">
-
             <div id="progressBar"></div>
-
         </div>
 
     </div>
-
-
 
     <div class="stat-card">
-
-        <div class="stat-title">
-            Piezas pendientes
-        </div>
-
-        <div
-        class="stat-number"
-        id="pendingCount">
-            0
-        </div>
-
+        <div class="stat-title">Piezas pendientes</div>
+        <div class="stat-number" id="pendingCount">0</div>
     </div>
 
+    <div class="stat-card">
+        <div class="stat-title">Requieren revisión</div>
+        <div class="stat-number orange" id="reviewCount">0</div>
+    </div>
 
 </div>
 
 
-
 <div class="panel">
-
 
 <div class="panel-header">
 
@@ -980,252 +768,181 @@ tbody tr:hover{
         </div>
 
         <div class="panel-description">
-            Pendientes primero · Marca cuando la publicación esté terminada
+            Pendientes primero · Los registros incompletos aparecen marcados para revisión
         </div>
 
     </div>
 
-
     <input
     class="search"
     id="searchInput"
-    placeholder="Buscar pieza, marca, modelo..."
+    placeholder="Buscar pieza, vehículo, precio..."
     oninput="renderPieces()">
 
 </div>
 
 
-
 <div class="table-wrap">
-
 
 <table>
 
 <thead>
 
 <tr>
-
     <th>#</th>
     <th>Pieza</th>
     <th>Marca</th>
     <th>Modelo</th>
     <th>Año</th>
     <th>Lado</th>
+    <th>Tipo</th>
+    <th>Precio</th>
+    <th>Observaciones</th>
     <th>Estado</th>
-    <th>Publicada</th>
+    <th>✓</th>
     <th>Link Mercado Libre</th>
     <th></th>
-
 </tr>
 
 </thead>
 
-
 <tbody id="piecesTable"></tbody>
-
 
 </table>
 
-
-<div
-id="emptyState"
-class="empty hidden">
-
-    No hay piezas registradas.
-
-</div>
-
-
+<div id="emptyState" class="empty hidden">
+    No se encontraron piezas.
 </div>
 
 </div>
 
+</div>
 
 </section>
 
 
+<!-- BLOQUEADO -->
 
-<!-- ==========================================
-     BLOQUEADO
-========================================== -->
-
-<section
-id="lockedSection"
-class="hidden">
-
+<section id="lockedSection" class="hidden">
 
 <div class="panel locked">
 
     <div>
-
-        <div class="locked-icon">
-            🔒
-        </div>
-
-        <h2 id="lockedTitle">
-            Acceso restringido
-        </h2>
-
-        <p>
-            No tienes acceso a este apartado.
-        </p>
-
+        <div class="locked-icon">🔒</div>
+        <h2 id="lockedTitle">Acceso restringido</h2>
+        <p>No tienes acceso a este apartado.</p>
     </div>
 
 </div>
-
 
 </section>
 
 
+<!-- ADMIN -->
 
-<!-- ==========================================
-     ADMIN
-========================================== -->
-
-<section
-id="adminSection"
-class="hidden">
-
+<section id="adminSection" class="hidden">
 
 <div class="stats">
 
-
-<div class="stat-card">
-
-    <div class="stat-title">
-        Total de piezas
+    <div class="stat-card">
+        <div class="stat-title">Total de piezas</div>
+        <div class="stat-number" id="adminTotal">0</div>
     </div>
 
-    <div
-    class="stat-number"
-    id="adminTotal">
-        0
+    <div class="stat-card">
+        <div class="stat-title">Publicadas</div>
+        <div class="stat-number green" id="adminPublished">0</div>
     </div>
 
-</div>
-
-
-
-<div class="stat-card">
-
-    <div class="stat-title">
-        Publicadas
+    <div class="stat-card">
+        <div class="stat-title">Pendientes</div>
+        <div class="stat-number purple" id="adminPending">0</div>
     </div>
 
-    <div
-    class="stat-number green"
-    id="adminPublished">
-        0
+    <div class="stat-card">
+        <div class="stat-title">Requieren revisión</div>
+        <div class="stat-number orange" id="adminReview">0</div>
     </div>
 
 </div>
-
-
-
-<div class="stat-card">
-
-    <div class="stat-title">
-        Pendientes
-    </div>
-
-    <div
-    class="stat-number purple"
-    id="adminPending">
-        0
-    </div>
-
-</div>
-
-
-</div>
-
 
 
 <div class="panel">
 
-
 <div class="panel-header">
 
     <div>
-
         <div class="panel-title">
             Administración MOCED
         </div>
 
         <div class="panel-description">
-            Historial de publicaciones realizadas
+            Historial de publicaciones realizadas en Mercado Libre
         </div>
-
     </div>
+
+    <input
+    class="search"
+    id="adminSearchInput"
+    placeholder="Buscar en publicaciones..."
+    oninput="renderAdmin()">
 
 </div>
 
 
-
 <div class="table-wrap">
-
 
 <table>
 
 <thead>
 
 <tr>
-
     <th>Pieza</th>
-    <th>Vehículo</th>
+    <th>Marca</th>
+    <th>Modelo</th>
+    <th>Año</th>
+    <th>Lado</th>
+    <th>Tipo</th>
+    <th>Precio</th>
+    <th>Observaciones</th>
     <th>Estado</th>
     <th>Publicado por</th>
     <th>Fecha</th>
     <th>Mercado Libre</th>
-
 </tr>
 
 </thead>
 
-
 <tbody id="adminTable"></tbody>
-
 
 </table>
 
-
-<div
-id="adminEmpty"
-class="empty hidden">
-
+<div id="adminEmpty" class="empty hidden">
     Todavía no existen publicaciones.
-
-</div>
-
-
 </div>
 
 </div>
 
+</div>
 
 </section>
-
 
 </main>
 
 </section>
 
 
-
 <script>
 
-/* ==========================================
+/* ================================
    SUPABASE
-========================================== */
+================================ */
 
 const SUPABASE_URL =
 "https://ettmywmhvmihkzubtcng.supabase.co";
 
-
 const SUPABASE_KEY =
 "sb_publishable_YPilTgaZckx80q4mqSLn1w_RNlaLfE2";
-
 
 const db =
 window.supabase.createClient(
@@ -1234,10 +951,9 @@ window.supabase.createClient(
 );
 
 
-
-/* ==========================================
+/* ================================
    USUARIOS
-========================================== */
+================================ */
 
 const USERS = {
 
@@ -1255,25 +971,19 @@ const USERS = {
 
 };
 
-
 let currentUser=null;
-
 let pieces=[];
 
 
-
-/* ==========================================
+/* ================================
    LOGIN
-========================================== */
+================================ */
 
 document
 .getElementById("loginForm")
-.addEventListener(
-"submit",
-function(e){
+.addEventListener("submit",function(e){
 
     e.preventDefault();
-
 
     const username =
     document
@@ -1282,16 +992,13 @@ function(e){
     .trim()
     .toLowerCase();
 
-
     const password =
     document
     .getElementById("password")
     .value;
 
-
     const user =
     USERS[username];
-
 
     if(
         !user ||
@@ -1304,30 +1011,21 @@ function(e){
         "Usuario o contraseña incorrectos.";
 
         return;
-
     }
 
-
-    currentUser = {
-
+    currentUser={
         username,
-
         ...user
-
     };
-
 
     sessionStorage.setItem(
         "mocedUser",
         JSON.stringify(currentUser)
     );
 
-
     enterApp();
 
-}
-);
-
+});
 
 
 function enterApp(){
@@ -1336,41 +1034,33 @@ function enterApp(){
     .getElementById("loginScreen")
     .style.display="none";
 
-
     document
     .getElementById("app")
     .style.display="block";
 
-
     document
     .getElementById("displayUser")
-    .textContent =
+    .textContent=
     currentUser.name;
-
 
     document
     .getElementById("displayRole")
-    .textContent =
+    .textContent=
     currentUser.role==="admin"
     ? "Administrador"
     : "Trabajador";
 
-
     document
     .getElementById("avatar")
-    .textContent =
+    .textContent=
     currentUser.name
     .charAt(0)
     .toUpperCase();
 
-
     showPieces();
 
-
     loadPieces();
-
 }
-
 
 
 function logout(){
@@ -1380,58 +1070,46 @@ function logout(){
     );
 
     location.reload();
-
 }
 
 
-
-/* ==========================================
+/* ================================
    RECUPERAR SESIÓN
-========================================== */
+================================ */
 
 const savedUser =
 sessionStorage.getItem(
     "mocedUser"
 );
 
-
 if(savedUser){
 
     try{
 
-        currentUser =
+        currentUser=
         JSON.parse(savedUser);
 
         enterApp();
 
-    }
-
-    catch{
+    }catch{
 
         sessionStorage.removeItem(
             "mocedUser"
         );
-
     }
-
 }
 
 
-
-/* ==========================================
+/* ================================
    CARGAR PIEZAS
-========================================== */
+================================ */
 
 async function loadPieces(){
 
-    const {
-        data,
-        error
-    } =
+    const {data,error} =
     await db
     .from("piezas")
     .select("*");
-
 
     if(error){
 
@@ -1442,40 +1120,37 @@ async function loadPieces(){
         );
 
         return;
-
     }
 
+    pieces=(data || []).sort((a,b)=>{
 
-    pieces =
-    (data || [])
-    .sort((a,b)=>{
+        /*
+        Primero:
+        1. Pendientes
+        2. Pendientes que requieren revisión
+        3. Publicadas
+        */
 
-        if(
-            a.publicada !== b.publicada
-        ){
-
+        if(a.publicada !== b.publicada){
             return a.publicada ? 1 : -1;
+        }
 
+        if(a.revisar !== b.revisar){
+            return a.revisar ? -1 : 1;
         }
 
         return b.id-a.id;
-
     });
 
-
     renderPieces();
-
     updateStats();
-
     renderAdmin();
-
 }
 
 
-
-/* ==========================================
-   RENDER PIEZAS
-========================================== */
+/* ================================
+   TABLA DE PIEZAS
+================================ */
 
 function renderPieces(){
 
@@ -1484,7 +1159,6 @@ function renderPieces(){
     .getElementById(
         "piecesTable"
     );
-
 
     const search =
     document
@@ -1495,48 +1169,60 @@ function renderPieces(){
     .toLowerCase()
     .trim();
 
-
     const filtered =
     pieces.filter(p=>{
 
+        const priceText =
+        p.precio != null
+        ? String(p.precio)
+        : "";
+
         const text =
-        `${p.pieza || ""}
-         ${p.marca || ""}
-         ${p.modelo || ""}
-         ${p.anio || ""}
-         ${p.lado || ""}
-         ${p.descripcion || ""}`
+        `
+        ${p.pieza || ""}
+        ${p.marca || ""}
+        ${p.modelo || ""}
+        ${p.anio || ""}
+        ${p.lado || ""}
+        ${p.tipo_origen || ""}
+        ${priceText}
+        ${p.observaciones || ""}
+        ${p.descripcion || ""}
+        `
         .toLowerCase();
 
-
         return text.includes(search);
-
     });
-
 
     tbody.innerHTML="";
 
-
     document
-    .getElementById(
-        "emptyState"
-    )
+    .getElementById("emptyState")
     .classList
     .toggle(
         "hidden",
         filtered.length !== 0
     );
 
-
-    filtered.forEach(
-    (p,index)=>{
-
+    filtered.forEach((p,index)=>{
 
         const tr =
-        document.createElement(
-            "tr"
-        );
+        document.createElement("tr");
 
+        if(p.revisar){
+            tr.classList.add(
+                "review-row"
+            );
+        }
+
+        const reviewBadge =
+        p.revisar
+        ? `
+        <div class="review-badge">
+            ⚠ REVISAR DATOS
+        </div>
+        `
+        : "";
 
         tr.innerHTML=`
 
@@ -1544,45 +1230,55 @@ function renderPieces(){
             ${index+1}
         </td>
 
-
         <td>
             <strong>
                 ${safe(p.pieza)}
             </strong>
-        </td>
 
+            ${reviewBadge}
+        </td>
 
         <td>
-            ${safe(p.marca)}
+            ${displayValue(p.marca)}
         </td>
-
 
         <td>
-            ${safe(p.modelo)}
+            ${displayValue(p.modelo)}
         </td>
-
 
         <td>
-            ${safe(p.anio)}
+            ${displayValue(p.anio)}
         </td>
-
 
         <td>
-            ${safe(p.lado)}
+            ${displayValue(p.lado)}
         </td>
 
+        <td>
+            ${displayValue(p.tipo_origen)}
+        </td>
+
+        <td class="price">
+            ${formatPrice(p.precio)}
+        </td>
+
+        <td class="notes">
+            ${
+                displayValue(
+                    p.observaciones ||
+                    p.descripcion
+                )
+            }
+        </td>
 
         <td>
 
             <span
-            class="
-            status
-            ${
+            class="status ${
                 p.publicada
                 ? "published"
                 : "pending"
-            }
-            ">
+            }">
 
                 ${
                     p.publicada
@@ -1593,7 +1289,6 @@ function renderPieces(){
             </span>
 
         </td>
-
 
         <td>
 
@@ -1609,7 +1304,6 @@ function renderPieces(){
 
         </td>
 
-
         <td>
 
             <input
@@ -1623,7 +1317,6 @@ function renderPieces(){
             placeholder="Pega aquí el link...">
 
         </td>
-
 
         <td>
 
@@ -1639,18 +1332,14 @@ function renderPieces(){
 
         `;
 
-
         tbody.appendChild(tr);
-
     });
-
 }
 
 
-
-/* ==========================================
-   GUARDAR PIEZA
-========================================== */
+/* ================================
+   GUARDAR PUBLICACIÓN
+================================ */
 
 async function savePiece(id){
 
@@ -1659,22 +1348,18 @@ async function savePiece(id){
         `check-${id}`
     );
 
-
     const linkInput =
     document.getElementById(
         `link-${id}`
     );
 
-
     const published =
     checkbox.checked;
-
 
     const link =
     linkInput
     .value
     .trim();
-
 
     if(
         published &&
@@ -1688,18 +1373,14 @@ async function savePiece(id){
         checkbox.checked=false;
 
         return;
-
     }
-
 
     const oldPiece =
     pieces.find(
         p=>p.id===id
     );
 
-
     let publicationDate=null;
-
 
     if(published){
 
@@ -1711,9 +1392,7 @@ async function savePiece(id){
         ? oldPiece.fecha_publicacion
 
         : new Date().toISOString();
-
     }
-
 
     const changes={
 
@@ -1729,16 +1408,13 @@ async function savePiece(id){
 
         fecha_publicacion:
             publicationDate
-
     };
-
 
     const {error} =
     await db
     .from("piezas")
     .update(changes)
     .eq("id",id);
-
 
     if(error){
 
@@ -1749,32 +1425,26 @@ async function savePiece(id){
         );
 
         return;
-
     }
 
-
     await loadPieces();
-
 
     alert(
         published
         ? "Pieza publicada y guardada correctamente."
         : "Cambios guardados correctamente."
     );
-
 }
 
 
-
-/* ==========================================
+/* ================================
    ESTADÍSTICAS
-========================================== */
+================================ */
 
 function updateStats(){
 
     const now =
     new Date();
-
 
     const monthStart =
     new Date(
@@ -1783,14 +1453,11 @@ function updateStats(){
         1
     );
 
-
     const day =
     now.getDay();
 
-
     const monday =
     new Date(now);
-
 
     monday.setDate(
         now.getDate() -
@@ -1801,77 +1468,62 @@ function updateStats(){
         )
     );
 
-
     monday.setHours(
         0,0,0,0
     );
-
 
     const published =
     pieces.filter(
         p=>p.publicada
     );
 
-
     const monthly =
     published.filter(
-    p=>
-
+        p=>
         p.fecha_publicacion &&
-
         new Date(
             p.fecha_publicacion
         ) >= monthStart
-
     ).length;
-
 
     const weekly =
     published.filter(
-    p=>
-
+        p=>
         p.fecha_publicacion &&
-
         new Date(
             p.fecha_publicacion
         ) >= monday
-
     ).length;
-
 
     const pending =
     pieces.filter(
         p=>!p.publicada
     ).length;
 
+    const review =
+    pieces.filter(
+        p=>p.revisar
+    ).length;
 
     document
-    .getElementById(
-        "monthlyCount"
-    )
-    .textContent =
-    monthly.toLocaleString(
-        "es-MX"
-    );
-
+    .getElementById("monthlyCount")
+    .textContent=
+    monthly.toLocaleString("es-MX");
 
     document
-    .getElementById(
-        "weeklyCount"
-    )
-    .textContent =
+    .getElementById("weeklyCount")
+    .textContent=
     `${weekly} / 70`;
 
+    document
+    .getElementById("pendingCount")
+    .textContent=
+    pending.toLocaleString("es-MX");
 
     document
-    .getElementById(
-        "pendingCount"
-    )
-    .textContent =
-    pending.toLocaleString(
-        "es-MX"
-    );
-
+    .getElementById("reviewCount")
+    .textContent=
+    review.toLocaleString("es-MX");
 
     const percent =
     Math.min(
@@ -1879,54 +1531,40 @@ function updateStats(){
         100
     );
 
-
     document
-    .getElementById(
-        "progressBar"
-    )
-    .style.width =
+    .getElementById("progressBar")
+    .style.width=
     percent+"%";
 
-
     document
-    .getElementById(
-        "adminTotal"
-    )
-    .textContent =
+    .getElementById("adminTotal")
+    .textContent=
     pieces.length
-    .toLocaleString(
-        "es-MX"
-    );
-
+    .toLocaleString("es-MX");
 
     document
-    .getElementById(
-        "adminPublished"
-    )
-    .textContent =
+    .getElementById("adminPublished")
+    .textContent=
     published.length
-    .toLocaleString(
-        "es-MX"
-    );
-
+    .toLocaleString("es-MX");
 
     document
-    .getElementById(
-        "adminPending"
-    )
-    .textContent =
+    .getElementById("adminPending")
+    .textContent=
     pending
-    .toLocaleString(
-        "es-MX"
-    );
+    .toLocaleString("es-MX");
 
+    document
+    .getElementById("adminReview")
+    .textContent=
+    review
+    .toLocaleString("es-MX");
 }
 
 
-
-/* ==========================================
+/* ================================
    ADMINISTRACIÓN
-========================================== */
+================================ */
 
 function renderAdmin(){
 
@@ -1936,55 +1574,79 @@ function renderAdmin(){
         "adminTable"
     );
 
+    const search =
+    document
+    .getElementById(
+        "adminSearchInput"
+    )
+    .value
+    .toLowerCase()
+    .trim();
 
     tbody.innerHTML="";
 
-
-    const published =
+    let published =
     pieces
     .filter(
         p=>p.publicada
     )
     .sort(
-    (a,b)=>
-
+        (a,b)=>
         new Date(
             b.fecha_publicacion || 0
         ) -
-
         new Date(
             a.fecha_publicacion || 0
         )
-
     );
 
+    if(search){
+
+        published =
+        published.filter(p=>{
+
+            const text =
+            `
+            ${p.pieza || ""}
+            ${p.marca || ""}
+            ${p.modelo || ""}
+            ${p.anio || ""}
+            ${p.lado || ""}
+            ${p.tipo_origen || ""}
+            ${p.precio || ""}
+            ${p.observaciones || ""}
+            ${p.publicado_por || ""}
+            `
+            .toLowerCase();
+
+            return text.includes(search);
+        });
+    }
 
     document
-    .getElementById(
-        "adminEmpty"
-    )
+    .getElementById("adminEmpty")
     .classList
     .toggle(
         "hidden",
         published.length !== 0
     );
 
-
     published.forEach(p=>{
-
 
         const tr =
         document.createElement(
             "tr"
         );
 
+        if(p.revisar){
+            tr.classList.add(
+                "review-row"
+            );
+        }
 
         let date="-";
 
-
-        if(
-            p.fecha_publicacion
-        ){
+        if(p.fecha_publicacion){
 
             date =
             new Date(
@@ -1997,9 +1659,7 @@ function renderAdmin(){
                     timeStyle:"short"
                 }
             );
-
         }
-
 
         const validLink =
         /^https?:\/\//i
@@ -2007,37 +1667,65 @@ function renderAdmin(){
             p.link_mercadolibre || ""
         );
 
+        const reviewBadge =
+        p.revisar
+        ? `
+        <div class="review-badge">
+            ⚠ REVISAR DATOS
+        </div>
+        `
+        : "";
 
         tr.innerHTML=`
 
         <td>
+
             <strong>
                 ${safe(p.pieza)}
             </strong>
-        </td>
 
-
-        <td>
-
-            ${safe(p.marca)}
-            ${safe(p.modelo)}
-            ${safe(p.anio)}
-            ${safe(p.lado)}
+            ${reviewBadge}
 
         </td>
 
+        <td>
+            ${displayValue(p.marca)}
+        </td>
 
         <td>
+            ${displayValue(p.modelo)}
+        </td>
 
-            <span
-            class="status published">
+        <td>
+            ${displayValue(p.anio)}
+        </td>
 
+        <td>
+            ${displayValue(p.lado)}
+        </td>
+
+        <td>
+            ${displayValue(p.tipo_origen)}
+        </td>
+
+        <td class="price">
+            ${formatPrice(p.precio)}
+        </td>
+
+        <td class="notes">
+            ${
+                displayValue(
+                    p.observaciones ||
+                    p.descripcion
+                )
+            }
+        </td>
+
+        <td>
+            <span class="status published">
                 PUBLICADA
-
             </span>
-
         </td>
-
 
         <td>
             ${safe(
@@ -2045,95 +1733,74 @@ function renderAdmin(){
             )}
         </td>
 
-
         <td>
             ${date}
         </td>
 
-
         <td>
 
-            ${
-                validLink
+        ${
+            validLink
 
-                ?
+            ?
 
-                `
-                <a
-                class="ml-link"
-                href="${
-                    safeAttribute(
-                        p.link_mercadolibre
-                    )
-                }"
-                target="_blank"
-                rel="noopener noreferrer">
-
-                    Abrir publicación ↗
-
-                </a>
-                `
-
-                :
-
-                safe(
+            `
+            <a
+            class="ml-link"
+            href="${
+                safeAttribute(
                     p.link_mercadolibre
-                    || "-"
                 )
-            }
+            }"
+            target="_blank"
+            rel="noopener noreferrer">
+
+                Abrir publicación ↗
+
+            </a>
+            `
+
+            :
+
+            safe(
+                p.link_mercadolibre ||
+                "-"
+            )
+        }
 
         </td>
 
         `;
 
-
         tbody.appendChild(tr);
-
     });
-
 }
 
 
-
-/* ==========================================
+/* ================================
    NAVEGACIÓN
-========================================== */
+================================ */
 
 function hideSections(){
 
     document
-    .getElementById(
-        "piecesSection"
-    )
-    .classList
-    .add("hidden");
-
+    .getElementById("piecesSection")
+    .classList.add("hidden");
 
     document
-    .getElementById(
-        "lockedSection"
-    )
-    .classList
-    .add("hidden");
-
+    .getElementById("lockedSection")
+    .classList.add("hidden");
 
     document
-    .getElementById(
-        "adminSection"
-    )
-    .classList
-    .add("hidden");
-
+    .getElementById("adminSection")
+    .classList.add("hidden");
 }
-
 
 
 function activateNav(el){
 
     document
-    .querySelectorAll(
-        ".nav-item"
-    )
+    .querySelectorAll(".nav-item")
     .forEach(
         x=>
         x.classList.remove(
@@ -2141,101 +1808,63 @@ function activateNav(el){
         )
     );
 
-
     if(el){
-
         el.classList.add(
             "active"
         );
-
     }
-
 }
-
 
 
 function showPieces(el=null){
 
     hideSections();
 
-
     if(el){
-
         activateNav(el);
-
     }
 
+    document
+    .getElementById("piecesSection")
+    .classList.remove("hidden");
 
     document
-    .getElementById(
-        "piecesSection"
-    )
-    .classList
-    .remove("hidden");
-
-
-    document
-    .getElementById(
-        "pageTitle"
-    )
-    .textContent =
+    .getElementById("pageTitle")
+    .textContent=
     "Subir piezas";
 
-
     document
-    .getElementById(
-        "pageSubtitle"
-    )
-    .textContent =
+    .getElementById("pageSubtitle")
+    .textContent=
     "Control de publicaciones de Mercado Libre";
-
 }
 
 
-
-function showLocked(
-    title,
-    el
-){
+function showLocked(title,el){
 
     hideSections();
 
     activateNav(el);
 
+    document
+    .getElementById("lockedSection")
+    .classList.remove("hidden");
 
     document
-    .getElementById(
-        "lockedSection"
-    )
-    .classList
-    .remove("hidden");
-
-
-    document
-    .getElementById(
-        "lockedTitle"
-    )
-    .textContent =
+    .getElementById("lockedTitle")
+    .textContent=
     title;
 
-
     document
-    .getElementById(
-        "pageTitle"
-    )
-    .textContent =
+    .getElementById("pageTitle")
+    .textContent=
     title;
 
-
     document
-    .getElementById(
-        "pageSubtitle"
-    )
-    .textContent =
+    .getElementById("pageSubtitle")
+    .textContent=
     "Módulo restringido";
-
 }
-
 
 
 function openAdmin(el){
@@ -2251,94 +1880,94 @@ function openAdmin(el){
         );
 
         return;
-
     }
-
 
     hideSections();
 
     activateNav(el);
 
+    document
+    .getElementById("adminSection")
+    .classList.remove("hidden");
 
     document
-    .getElementById(
-        "adminSection"
-    )
-    .classList
-    .remove("hidden");
-
-
-    document
-    .getElementById(
-        "pageTitle"
-    )
-    .textContent =
+    .getElementById("pageTitle")
+    .textContent=
     "Administración";
 
-
     document
-    .getElementById(
-        "pageSubtitle"
-    )
-    .textContent =
+    .getElementById("pageSubtitle")
+    .textContent=
     "Control general de publicaciones";
 
-
     renderAdmin();
-
 }
 
 
+/* ================================
+   UTILIDADES
+================================ */
 
-/* ==========================================
-   ESCAPAR TEXTO
-========================================== */
+function formatPrice(value){
+
+    if(
+        value === null ||
+        value === undefined ||
+        value === ""
+    ){
+        return "—";
+    }
+
+    const number =
+    Number(value);
+
+    if(Number.isNaN(number)){
+        return safe(value);
+    }
+
+    return new Intl.NumberFormat(
+        "es-MX",
+        {
+            style:"currency",
+            currency:"MXN",
+            maximumFractionDigits:0
+        }
+    ).format(number);
+}
+
+
+function displayValue(value){
+
+    if(
+        value === null ||
+        value === undefined ||
+        String(value).trim() === ""
+    ){
+        return "—";
+    }
+
+    return safe(value);
+}
+
 
 function safe(value){
 
     return String(
         value ?? ""
     )
-
-    .replaceAll(
-        "&",
-        "&amp;"
-    )
-
-    .replaceAll(
-        "<",
-        "&lt;"
-    )
-
-    .replaceAll(
-        ">",
-        "&gt;"
-    )
-
-    .replaceAll(
-        '"',
-        "&quot;"
-    )
-
-    .replaceAll(
-        "'",
-        "&#039;"
-    );
-
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
 
-
-function safeAttribute(
-    value
-){
-
+function safeAttribute(value){
     return safe(value);
-
 }
 
 </script>
-
 
 </body>
 </html>
